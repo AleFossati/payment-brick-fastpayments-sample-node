@@ -1,24 +1,35 @@
 const mercadoPagoPublicKey = document.getElementById("mercado-pago-public-key").value;
 const mercadopago = new MercadoPago(mercadoPagoPublicKey);
 let paymentBrickController;
-let authenticator;
 let fastPaymentToken;
 
 async function loadPaymentForm() {
+    // Make sure the product cost makes sense according to your country's currency
+    // Too low or too high values might cause the mercadopago.authenticator method to throw an error
     const productCost = parseFloat(document.getElementById('amount').value).toFixed(2);
-    const userEmail = "your_customer_email@mail.com";
+
+    // The user email must be from an existing Mercado Pago test user or a real Mercado Pago user
+    // Otherwise, the mercadopago.authenticator will not find the user and will throw an error
+    const userEmail = "test_user_708016305@testuser.com";
     
     try {
         // Step 1: Initialize authenticator
-        authenticator = await mercadopago.authenticator(productCost, userEmail);
+        // mercadopago.authenticator will call an API to validate the productCost and userEmail
+        const authenticator = await mercadopago.authenticator(productCost, userEmail);
         
         // Step 2: Generate fastPaymentToken
+        // authenticator.show will show a popup to the user and then redirect to Mercado Pago or Mercado Libre mobile app.
+        // once the user authenticates, this promise will resolve with the fastPaymentToken
         fastPaymentToken = await authenticator.show();
         
         // Step 3: Render Payment Brick
+        // after we have the fastPaymentToken, we can render the payment brick
         await renderPaymentBrick();
         
     } catch (error) {
+        // TODO: add link below
+        // For a list of possible errors, see: {link}
+
         alert("Error loading payment form, details in console");
         console.error(error);
     }
