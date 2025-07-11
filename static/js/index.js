@@ -10,6 +10,8 @@ async function loadPaymentForm() {
 
     // The user email must be from an existing Mercado Pago test user or a real Mercado Pago user
     // Otherwise, the mercadopago.authenticator will not find the user and will throw an error
+
+    // TODO: change to your_payer_email@mail.com
     const userEmail = "test_user_708016305@testuser.com";
     
     try {
@@ -48,7 +50,26 @@ async function renderPaymentBrick() {
                 alert(JSON.stringify(error))
             },
             onSubmit: (paymentData) => {
-                proccessPayment(paymentData)
+                return new Promise(async (resolve, reject) => {
+                    try {
+                        const result = await proccessPayment(paymentData)
+
+                        // Resolving the promise will complete the brick payment button animation
+                        resolve()
+
+                        document.getElementById("payment-id").innerText = result.id;
+                        document.getElementById("payment-status").innerText = result.status;
+                        document.getElementById("payment-detail").innerText = result.detail;
+                        $('.container__payment').fadeOut(500);
+                        setTimeout(() => { $('.container__result').show(500).fadeIn(); }, 500);
+
+                    } catch (error) {
+                        alert(error.message);
+                        
+                        // Rejecting the promise will revert the brick payment button animation allowing the user to try again
+                        reject()
+                    }
+                })
             }
         },
         locale: 'en',
@@ -57,8 +78,7 @@ async function renderPaymentBrick() {
                 style: {
                     theme: 'dark',
                     customVariables: {
-                        formBackgroundColor: '#1d2431',
-                        baseColor: 'aquamarine'
+                        formBackgroundColor: '#1d2431'
                     }
                 }
             }
@@ -69,34 +89,19 @@ async function renderPaymentBrick() {
     paymentBrickController = await bricks.create('payment', 'mercadopago-bricks-contaner__PaymentCard', settings);
 }
 
-const proccessPayment = (cardFormData) => {
-    fetch("/process_payment", {
+const proccessPayment = async (cardFormData) => {
+    const response = await fetch("/process_payment", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cardFormData),
     })
-    .then(response => {
-        return response.json();
-    })
-    .then(result => {
-        if(!result.hasOwnProperty("error_message")) {
-            document.getElementById("payment-id").innerText = result.id;
-            document.getElementById("payment-status").innerText = result.status;
-            document.getElementById("payment-detail").innerText = result.detail;
-            $('.container__payment').fadeOut(500);
-            setTimeout(() => { $('.container__result').show(500).fadeIn(); }, 500);
-        } else {
-            alert(JSON.stringify({
-                status: result.status,
-                message: result.error_message
-            }))
-        }
-    })
-    .catch(error => {
-        alert("Unexpected error\n"+JSON.stringify(error));
-    });
+    const result = await response.json();
+
+    if (result.hasOwnProperty("error_message")) {
+        throw new Error(result.error_message);
+    }
+
+    return result;
 }
 
 // Handle transitions

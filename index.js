@@ -1,7 +1,9 @@
-const open = require("open");
-const path = require("path");
-const express = require("express");
-const mercadopago = require("mercadopago");
+import hbs from 'hbs';
+import open from 'open';
+import path from 'path';
+import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
+import { MercadoPagoConfig, Order } from "mercadopago";
 
 const mercadoPagoPublicKey = process.env.MERCADO_PAGO_SAMPLE_PUBLIC_KEY;
 if (!mercadoPagoPublicKey) {
@@ -15,13 +17,15 @@ if (!mercadoPagoAccessToken) {
   process.exit(1);
 }
 
-mercadopago.configurations.setAccessToken(mercadoPagoAccessToken);
+const mpClient = new MercadoPagoConfig({
+	accessToken: mercadoPagoAccessToken,
+});
 
 const app = express();
 
 app.set("view engine", "html");
-app.engine("html", require("hbs").__express);
-app.set("views", path.join(__dirname, "views"))
+app.engine("html", hbs.__express);
+app.set("views", path.join(import.meta.dirname, "views"))
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
@@ -31,40 +35,42 @@ app.get("/", function (req, res) {
   res.status(200).render("index", { mercadoPagoPublicKey });
 }); 
 
-app.post("/process_payment", (req, res) => {
-  const { body } = req;
-  
-  mercadopago.payment.save(body)
-    .then(function(response) {
-      const { response: data } = response;
+app.post("/process_payment", async (req, res) => {
+  const order = new Order(mpClient);
 
-      res.status(201).json({
-        detail: data.status_detail,
-        status: data.status,
-        id: data.id
-      });
-    })
-    .catch(function(error) {
-      console.log(error);
-      const { errorMessage, errorStatus }  = validateError(error);
-      res.status(errorStatus).json({ error_message: errorMessage });
+  const body = {
+    type: "online",
+    processing_mode: "automatic",
+    total_amount: req.body[0].amount,
+    external_reference: "ext_ref_1234",
+    payer: {
+      // TODO: change to your_payer_email@mail.com
+      email: "test_user_708016305@testuser.com",
+    },
+    transactions: {
+      payments: req.body,
+    },
+  };
+
+  const requestOptions = {
+    idempotencyKey: uuidv4(),
+  };
+
+  try {
+    const response = await order.create({ body, requestOptions });
+    res.status(201).json({
+      detail: response.status_detail,
+      status: response.status,
+      id: response.id
     });
-});
 
-function validateError(error) {
-  let errorMessage = 'Unknown error cause';
-  let errorStatus = 400;
+  } catch (error) {
+    console.error("Fail to process payment", JSON.stringify(error, null, 4));
 
-  if(error.cause) {
-    const sdkErrorMessage = error.cause[0].description;
-    errorMessage = sdkErrorMessage || errorMessage;
-
-    const sdkErrorStatus = error.status;
-    errorStatus = sdkErrorStatus || errorStatus;
+    const errorMessage = "An error occurred while processing the payment. Check server logs for more details.";
+    res.status(500).json({ error_message: errorMessage });
   }
-
-  return { errorMessage, errorStatus };
-}
+});
 
 app.listen(8080, () => {
   console.log("The server is now running on port 8080");
