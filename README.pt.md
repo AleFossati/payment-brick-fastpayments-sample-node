@@ -10,7 +10,7 @@
 
 ## 💡 Requisitos
 
-- Node.js 10 ou mais recente (você pode baixar [aqui](https://nodejs.org/)).
+- Node.js v20.11.1 ou superior (você pode baixar [aqui](https://nodejs.org/)).
 - [Leia nossas instruções](https://www.mercadopago.com/developers/pt/docs/getting-started) sobre como criar uma aplicação no Painel de Desenvolvedores do Mercado Pago para obter a public key e o access token. Essas chaves irão te dar acesso às APIs do Mercado Pago.
 
 ## :gear: Instalação
