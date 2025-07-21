@@ -1,4 +1,4 @@
-# Procesamiento de pagos con tarjeta a través de Checkout Bricks
+# Procesamiento de Fast Payments a través de Checkout Bricks
 
 [English](README.md) / [Português](README.pt.md)
 

@@ -86,14 +86,14 @@ async function renderPaymentBrick() {
     }
 
     const bricks = mercadopago.bricks();
-    paymentBrickController = await bricks.create('payment', 'mercadopago-bricks-contaner__PaymentCard', settings);
+    paymentBrickController = await bricks.create('payment', 'mercadopago-bricks-container', settings);
 }
 
-const proccessPayment = async (cardFormData) => {
+const proccessPayment = async (bricksFormData) => {
     const response = await fetch("/process_payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cardFormData),
+        body: JSON.stringify(bricksFormData),
     })
     const result = await response.json();
 

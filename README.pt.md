@@ -1,4 +1,4 @@
-# Processamento de pagamento com cartão via Checkout Bricks
+# Processamento de Fast Payments via Checkout Bricks
 
 [English](README.md) / [Español](README.es.md)
 
@@ -18,6 +18,7 @@
 1. Clone o projeto.
 
 ```bash
+# TODO: update card payment references
 git clone https://github.com/mercadopago/card-payment-bricks-sample-node.git
 ```
 

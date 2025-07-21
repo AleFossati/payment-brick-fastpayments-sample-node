@@ -1,4 +1,4 @@
-# Card payment processing with Checkout Bricks
+# Fast Payments processing with Checkout Bricks
 
 [Português](README.pt.md) / [Español](README.es.md)
 

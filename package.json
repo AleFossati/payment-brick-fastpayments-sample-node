@@ -1,8 +1,8 @@
 {
-  "name": "card-payment-bricks-sample",
+  "name": "payment-brick-fast-payments-sample",
   "type": "module",
   "version": "1.0.0",
-  "description": "A simple Mercado Pago Card Payment Bricks sample project",
+  "description": "A simple Mercado Pago Payment Brick for Fast Payments sample project",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
