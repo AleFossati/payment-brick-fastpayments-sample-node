@@ -108,13 +108,42 @@ const proccessPayment = async (bricksFormData) => {
 document.getElementById('checkout-btn').addEventListener('click', function(){
     $('.container__cart').fadeOut(500);
     setTimeout(() => {
-        loadPaymentForm();
         $('.container__payment').show(500).fadeIn();
     }, 500);
 });
 
+// Handle Mercado Pago payment button click
+document.getElementById('mp-payment-btn').addEventListener('click', async function(){
+    const button = this;
+    button.disabled = true;
+    button.innerText = 'Loading...';
+    
+    try {
+        await loadPaymentForm();
+        document.getElementById('payment-button-container').style.display = 'none';
+    } catch (error) {
+        button.disabled = false;
+        button.innerText = 'Pay with Mercado Pago';
+        console.error('Error loading payment form:', error);
+    }
+});
+
 document.getElementById('go-back').addEventListener('click', function(){
     $('.container__payment').fadeOut(500);
+    
+    // Reset payment form state
+    document.getElementById('payment-button-container').style.display = 'block';
+    
+    const button = document.getElementById('mp-payment-btn');
+    button.disabled = false;
+    button.innerText = 'Pay with Mercado Pago';
+    
+    // Destroy existing payment brick if exists
+    if (paymentBrickController) {
+        paymentBrickController.unmount();
+        paymentBrickController = null;
+    }
+    
     setTimeout(() => { $('.container__cart').show(500).fadeIn(); }, 500);
 });
 
