@@ -1,7 +1,7 @@
 const mercadoPagoPublicKey = document.getElementById("mercado-pago-public-key").value;
-const mercadopago = new MercadoPago(mercadoPagoPublicKey);
-const hardcodedEmail = "your_payer_email@mail.com";
+const payerEmail = document.getElementById("payer-email").value;
 
+const mercadopago = new MercadoPago(mercadoPagoPublicKey);
 let paymentBrickController;
 let fastPaymentToken;
 
@@ -12,7 +12,7 @@ async function loadPaymentForm() {
 
     // The user email must be from an existing Mercado Pago test user or a real Mercado Pago user
     // Otherwise, the mercadopago.authenticator will not find the user and will throw an error
-    const userEmail = hardcodedEmail;
+    const userEmail = payerEmail;
     
     try {
         // Step 1: Initialize authenticator
@@ -94,7 +94,7 @@ const proccessPayment = async (bricksFormData) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             formData: bricksFormData,
-            userEmail: hardcodedEmail
+            userEmail: payerEmail
         }),
     })
     const result = await response.json();

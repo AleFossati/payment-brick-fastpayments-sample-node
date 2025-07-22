@@ -38,10 +38,10 @@ npm install
 1. Run the following command to start the application:
 
 ```bash
-MERCADO_PAGO_SAMPLE_PUBLIC_KEY=YOUR_PUBLIC_KEY MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN npm start
+MERCADO_PAGO_SAMPLE_PUBLIC_KEY=YOUR_PUBLIC_KEY MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN PAYER_EMAIL=YOUR_PAYER_EMAIL npm start
 ``` 
 
-2. Remember to replace the values of `YOUR_PUBLIC_KEY` and `YOUR_ACCESS_TOKEN` with the corresponding [credentials](https://www.mercadopago.com/developers/panel) from your account.
+2. Remember to replace the values of `YOUR_PUBLIC_KEY`, `YOUR_ACCESS_TOKEN` and `PAYER_EMAIL` with the corresponding [credentials](https://www.mercadopago.com/developers/panel) from your account and a valid email to be used as the buyer/payer. The email can be from a real user or from a test user.
 
 3. Navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 

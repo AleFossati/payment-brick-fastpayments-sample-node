@@ -44,10 +44,10 @@ cd payment-brick-fast-payments-sample
 2. Ejecuta el siguiente comando para iniciar la aplicación:
 
 ```bash
-MERCADO_PAGO_SAMPLE_PUBLIC_KEY=YOUR_PUBLIC_KEY MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN npm start
+MERCADO_PAGO_SAMPLE_PUBLIC_KEY=YOUR_PUBLIC_KEY MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN PAYER_EMAIL=YOUR_PAYER_EMAIL npm start
 ```
 
-3. Recuerda cambiar los valores de `YOUR_PUBLIC_KEY` y `YOUR_ACCESS_TOKEN` por las [credenciales](https://www.mercadopago.com/developers/panel) de su cuenta.
+3. Recuerda reemplazar los valores de `YOUR_PUBLIC_KEY`, `YOUR_ACCESS_TOKEN` y `PAYER_EMAIL` con las [credenciales](https://www.mercadopago.com/developers/panel) correspondientes de tu cuenta y un correo electrónico válido que se utilizará como comprador/pagador. El correo electrónico puede ser de un usuario real o de un usuario de prueba.
 
 4. Accede a [http://localhost:8080](http://localhost:8080) en tu navegador.
 

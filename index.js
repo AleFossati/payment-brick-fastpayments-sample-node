@@ -17,6 +17,12 @@ if (!mercadoPagoAccessToken) {
   process.exit(1);
 }
 
+const payerEmail = process.env.PAYER_EMAIL;
+if (!payerEmail) {
+  console.log("Error: payer email not defined");
+  process.exit(1);
+}
+
 const mpClient = new MercadoPagoConfig({
 	accessToken: mercadoPagoAccessToken,
 });
@@ -32,7 +38,7 @@ app.use(express.static("./static"));
 app.use(express.json());
 
 app.get("/", function (req, res) {
-  res.status(200).render("index", { mercadoPagoPublicKey });
+  res.status(200).render("index", { mercadoPagoPublicKey, payerEmail });
 }); 
 
 app.post("/process_payment", async (req, res) => {
