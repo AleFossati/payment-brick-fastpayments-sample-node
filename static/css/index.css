@@ -406,24 +406,17 @@ footer p a:hover {
 
 /* Mercado Pago Payment Button - Start */
 #mp-payment-btn {
-    background: linear-gradient(135deg, #009ee3 0%, #00b4f1 100%);
+    margin: 20px 0;
+    background-color: aquamarine;
     border: none;
-    color: white;
+    color: #1d2431;
     font-weight: 600;
     font-size: 16px;
     padding: 15px 30px;
     border-radius: 8px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 158, 227, 0.3);
-    text-transform: none;
-    min-width: 220px;
-    width: 220px;
-}
-
-#mp-payment-btn:hover {
-    background: linear-gradient(135deg, #0088cc 0%, #009ee3 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 158, 227, 0.4);
+    min-width: 240px;
+    width: 240px;
 }
 
 #mp-payment-btn:disabled {
@@ -434,6 +427,7 @@ footer p a:hover {
 }
 
 #payment-button-container {
-    margin: 30px 0;
+    display: grid;
+    place-content: center;
 }
 /* Mercado Pago Payment Button - End */ 
