@@ -18,14 +18,13 @@
 1. Clone o projeto.
 
 ```bash
-# TODO: update card payment references
-git clone https://github.com/mercadopago/card-payment-bricks-sample-node.git
+git clone https://github.com/mercadopago/payment-brick-fast-payments-sample.git
 ```
 
 2. Acesse a pasta raiz do projeto.
 
 ```bash
-cd card-payment-bricks-sample-node
+cd payment-brick-fast-payments-sample
 ```
 
 3. Instale as dependências necessárias.

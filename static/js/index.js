@@ -1,5 +1,7 @@
 const mercadoPagoPublicKey = document.getElementById("mercado-pago-public-key").value;
 const mercadopago = new MercadoPago(mercadoPagoPublicKey);
+const hardcodedEmail = "your_payer_email@mail.com";
+
 let paymentBrickController;
 let fastPaymentToken;
 
@@ -10,9 +12,7 @@ async function loadPaymentForm() {
 
     // The user email must be from an existing Mercado Pago test user or a real Mercado Pago user
     // Otherwise, the mercadopago.authenticator will not find the user and will throw an error
-
-    // TODO: change to your_payer_email@mail.com
-    const userEmail = "test_user_708016305@testuser.com";
+    const userEmail = hardcodedEmail;
     
     try {
         // Step 1: Initialize authenticator
@@ -29,8 +29,7 @@ async function loadPaymentForm() {
         await renderPaymentBrick();
         
     } catch (error) {
-        // TODO: add link below
-        // For a list of possible errors, see: {link}
+        // For a list of possible errors, see: https://www.mercadopago.com/developers/es/docs/checkout-api-v2/payment-integration/fast-payments#bookmark_erros_da_subclasse_authenticator
 
         alert("Error loading payment form, details in console");
         console.error(error);
@@ -93,7 +92,10 @@ const proccessPayment = async (bricksFormData) => {
     const response = await fetch("/process_payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bricksFormData),
+        body: JSON.stringify({
+            formData: bricksFormData,
+            userEmail: hardcodedEmail
+        }),
     })
     const result = await response.json();
 

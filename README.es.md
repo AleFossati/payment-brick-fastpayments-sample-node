@@ -18,13 +18,13 @@
 1. Clona el proyecto.
 
 ```bash
-git clone https://github.com/mercadopago/card-payment-bricks-sample-node.git
+git clone https://github.com/mercadopago/payment-brick-fast-payments-sample.git
 ```
 
 2. Accede a la carpeta.
 
 ```bash
-cd card-payment-bricks-sample-node
+cd payment-brick-fast-payments-sample
 ```
 
 3. Instala las dependencias necesarias.
@@ -38,7 +38,7 @@ npm install
 1. Accede a la carpeta del proyecto.
 
 ```bash
-cd card-payment-bricks-sample-node
+cd payment-brick-fast-payments-sample
 ```
 
 2. Ejecuta el siguiente comando para iniciar la aplicación:

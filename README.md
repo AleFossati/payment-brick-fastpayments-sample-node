@@ -18,13 +18,13 @@
 1. Clone the project.
 
 ```bash
-git clone https://github.com/mercadopago/card-payment-bricks-sample-node.git
+git clone https://github.com/mercadopago/payment-brick-fast-payments-sample.git
 ```
 
 2. Go to the project's folder.
 
 ```bash
-cd card-payment-bricks-sample-node
+cd payment-brick-fast-payments-sample
 ```
 
 3. Then install the dependencies.

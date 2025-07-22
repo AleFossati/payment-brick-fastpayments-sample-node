@@ -37,18 +37,18 @@ app.get("/", function (req, res) {
 
 app.post("/process_payment", async (req, res) => {
   const order = new Order(mpClient);
+  const { formData, userEmail } = req.body;
 
   const body = {
     type: "online",
     processing_mode: "automatic",
-    total_amount: req.body[0].amount,
+    total_amount: formData[0].amount,
     external_reference: "ext_ref_1234",
     payer: {
-      // TODO: change to your_payer_email@mail.com
-      email: "test_user_708016305@testuser.com",
+      email: userEmail,
     },
     transactions: {
-      payments: req.body,
+      payments: formData,
     },
   };
 
