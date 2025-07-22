@@ -1,17 +1,19 @@
-# Procesamiento de Fast Payments a través de Checkout Bricks
+# Fast Payments con Checkout Bricks
 
 [English](README.md) / [Português](README.pt.md)
+
+> **Nota:** Fast Payments está disponible solo para comerciantes seleccionados. Estamos trabajando para hacerlo disponible para todos pronto.
 
 ## :computer: Tecnologías
 
 - Node.js
-- [NPM](https://www.npmjs.com) (dependency manager)
+- [NPM](https://www.npmjs.com) (gestor de dependencias)
 - Express
 
 ## 💡 Requisitos
 
-- Node.js v20.11.1 o superior (descarga [aquí](https://nodejs.org/)).
-- [Lee nuestras instrucciones](https://www.mercadopago.com/developers/es/docs/getting-started) sobre cómo crear una aplicación en el Panel de Desarrolladores de Mercado Pago para obtener la public key y el access token. Estas llaves te darán acceso a las API de Mercado Pago.
+- Node.js v20.11.1 o superior (puedes descargarlo [aquí](https://nodejs.org/)).
+- [Lee nuestras instrucciones](https://www.mercadopago.com/developers/es/docs/getting-started) sobre cómo crear una aplicación en el Panel de Desarrolladores de Mercado Pago para obtener tu clave pública y token de acceso. Estos te darán acceso a las APIs públicas de Mercado Pago.
 
 ## :gear: Instalación
 
@@ -21,44 +23,46 @@
 git clone https://github.com/mercadopago/payment-brick-fast-payments-sample.git
 ```
 
-2. Accede a la carpeta.
+2. Ve a la carpeta del proyecto.
 
 ```bash
 cd payment-brick-fast-payments-sample
 ```
 
-3. Instala las dependencias necesarias.
+3. Luego instala las dependencias.
 
 ```bash
 npm install
 ```
 
-## 🌟 Como ejecutar
+## 🌟 Cómo ejecutarlo
 
-1. Accede a la carpeta del proyecto.
+Fast Payments solo están disponibles en dispositivos móviles. Por lo tanto, para probar esta integración, debes usar un emulador Android/iOS o acceder directamente desde tu dispositivo móvil. Para facilitar el acceso al contenido de este proyecto en estos dispositivos, usaremos localtunnel.
 
-```bash
-cd payment-brick-fast-payments-sample
-```
-
-2. Ejecuta el siguiente comando para iniciar la aplicación:
+1. Ejecuta el siguiente comando para iniciar la aplicación:
 
 ```bash
-MERCADO_PAGO_SAMPLE_PUBLIC_KEY=YOUR_PUBLIC_KEY MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN PAYER_EMAIL=YOUR_PAYER_EMAIL npm start
+MERCADO_PAGO_SAMPLE_PUBLIC_KEY=TU_CLAVE_PUBLICA MERCADO_PAGO_SAMPLE_ACCESS_TOKEN=TU_TOKEN_DE_ACCESO PAYER_EMAIL=EMAIL_DEL_PAGADOR npm start
 ```
 
-3. Recuerda reemplazar los valores de `YOUR_PUBLIC_KEY`, `YOUR_ACCESS_TOKEN` y `PAYER_EMAIL` con las [credenciales](https://www.mercadopago.com/developers/panel) correspondientes de tu cuenta y un correo electrónico válido que se utilizará como comprador/pagador. El correo electrónico puede ser de un usuario real o de un usuario de prueba.
+Recuerda reemplazar los valores de `TU_CLAVE_PUBLICA`, `TU_TOKEN_DE_ACCESO` y `EMAIL_DEL_PAGADOR` con las [credenciales](https://www.mercadopago.com/developers/panel) correspondientes de tu cuenta y un correo electrónico válido para ser usado como comprador/pagador. El correo electrónico puede ser de un usuario real o de un usuario de prueba.
 
-4. Accede a [http://localhost:8080](http://localhost:8080) en tu navegador.
+2. Ejecuta el siguiente comando en una nueva ventana de terminal para crear un túnel:
+```bash
+npm run localtunnel
+```
 
-### :test_tube: Pruebas
-En nuestras [instrucciones de prueba](https://www.mercadopago.com/developers/es/docs/checkout-bricks/integration/integration-test) encontrarás **[tarjetas de crédito](https://www.mercadopago.com/developers/es/docs/checkout-bricks/additional-content/test-cards)** que se pueden utilizar para simular el pago de este ejemplo, junto con una guía sobre cómo crear **usuarios de prueba**.
+3. Accede a la URL pública generada por el comando anterior a través de tu dispositivo móvil o emulador.
+
+### :video_camera: Ejemplo
+
+TODO: Insertar video aquí
 
 ## :handshake: Contribuyendo
 
-Puedes contribuir a este proyecto informando problemas y bugs. Antes de abrir una contribución, lee nuestro [código de conducta](CODE_OF_CONDUCT.md).
+Puedes contribuir a este proyecto reportando problemas y bugs. Antes de abrir un issue, asegúrate de leer nuestro [código de conducta](CODE_OF_CONDUCT.md).
 
 ## :bookmark: Licencia
 
-MIT License. Copyright (c) 2022 - Mercado Pago <br/>
-Para obtener más información, consulte el archivo [LICENSE](LICENSE).
+Licencia MIT. Copyright (c) 2025 - Mercado Pago <br/>
+Para más información, consulta el archivo [LICENSE](LICENSE).
