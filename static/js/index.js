@@ -1,7 +1,7 @@
 const mercadoPagoPublicKey = document.getElementById("mercado-pago-public-key").value;
-const payerEmail = document.getElementById("payer-email").value;
-
 const mercadopago = new MercadoPago(mercadoPagoPublicKey);
+
+let buyerEmail;
 let authenticator;
 let paymentBrickController;
 
@@ -79,7 +79,7 @@ const proccessPayment = async (bricksFormData) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             formData: bricksFormData,
-            userEmail: payerEmail
+            userEmail: buyerEmail
         }),
     })
     const result = await response.json();
@@ -92,6 +92,12 @@ const proccessPayment = async (bricksFormData) => {
 }
 
 document.getElementById('checkout-btn').addEventListener('click', async function(){
+    buyerEmail = document.getElementById('buyer-email').value;
+    if (!buyerEmail) {
+        alert('Please enter a valid email');
+        return;
+    }
+
     // When the user clicks on checkout, we call the authenticator method to validate if the user can pay using fast payments
     // The authenticator performs several validations using the purchase amount and user email
     // If something goes wrong, we'll catch the error via try/catch
@@ -102,7 +108,7 @@ document.getElementById('checkout-btn').addEventListener('click', async function
 
     // The user email must be from an existing Mercado Pago test user or a real Mercado Pago user
     // Otherwise, the mercadopago.authenticator will not find the user and will throw an error
-    const userEmail = payerEmail;
+    const userEmail = buyerEmail;
 
     const button = this;
     button.disabled = true;
